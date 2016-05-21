@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+    <session-factory>
+        <!--使用TomCat提供的共享池-->
+        <!--<property name="hibernate.connection.datasource">-->
+        <!--java:/comp/env/tent-->
+        <!--</property>-->
+
+        <!--配置C3P0连接池-->
+        <property name="hibernate.c3p0.max_size">10</property>
+        <property name="hibernate.c3p0.min_size">5</property>
+        <property name="c3p0.acquire_increment">2</property>
+        <property name="c3p0.timeout">2000</property>
+        <property name="c3p0.idle_test_period">2000</property>
+        <property name="c3p0.max_statements">10</property>
+
+        <!--普通的连接-->
+        <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="connection.url">jdbc:mysql://localhost:3306/shop</property>
+
+        <!--使用方言 -->
+        <property name="dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>
+
+        <!--调测时在控制台打印SQL语句，备查。-->
+        <property name="show_sql">true</property>
+
+        <!--对SQL语句进行格式化-->
+        <property name="format_sql">true</property>
+
+        <!--指定生成数据表-->
+        <property name="hbm2ddl.auto">create</property>
+        <mapping resource="cn/ajing/shop/service/entities/Account.hbm.xml"/>
+        <mapping resource="cn/ajing/shop/service/entities/Category.hbm.xml"/>
+
+
+    </session-factory>
+</hibernate-configuration>
